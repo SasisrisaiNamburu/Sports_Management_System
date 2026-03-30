@@ -114,7 +114,7 @@ sports\_management\_system/
 
 1. Download or clone the repository:
 
-git clone https://github.com/your-username/sports-management-system.git
+git clone https://github.com/SasisrisaiNamburu/Sports_Management_System.git
 
 
 
