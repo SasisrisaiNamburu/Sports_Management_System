@@ -171,7 +171,7 @@ http://localhost:3000/pages/login.html
 
 ###### **Run Commands**
 
-!\[Run Commands](screenshots/cmd.png)
+!\[Run Commands](https://raw.githubusercontent.com/SasisrisaiNamburu/Sports_Management_System/main/screenshots/cmd.png)
 
 
 
