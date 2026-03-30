@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Players</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="bg-light">
+
+<nav class="navbar navbar-expand-lg navbar-dark px-4">
+    <a class="navbar-brand fw-bold" href="#">Player Management System</a>
+
+    <div class="ms-auto d-flex gap-2">
+        <button class="btn btn-light btn-sm" onclick="goToDashboard()">Dashboard</button>
+        <button class="btn btn-light btn-sm" onclick="goToPlayers()">Players</button>
+        <button class="btn btn-light btn-sm" onclick="goToAddPlayer()">Add Player</button>
+        <button class="btn btn-danger btn-sm" onclick="logout()">Logout</button>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    
+    <h2 class="text-center mb-4">Players List</h2>
+
+	<button class="btn btn-secondary mb-3" onclick="goToDashboard()">Back to Dashboard</button>
+
+<input 
+    type="text" 
+    id="searchInput" 
+    class="form-control mb-3" 
+    placeholder="Search by name, sport, or position...">
+
+<h5 class="mb-3">Total Players: <span id="playerCount">0</span></h5>
+
+    <table class="table table-hover table-striped mt-3 shadow">
+        <thead>
+            <tr>
+                <th>Name</th>
+		<th>Age</th>
+                <th>Sport</th>
+                <th>Team</th>
+		<th>Position</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody id="playerTable">
+            <!-- JS will fill this -->
+        </tbody>
+
+    </table>
+
+</div>
+<script src="../js/main.js"></script>
+
+</body>
+</html>
