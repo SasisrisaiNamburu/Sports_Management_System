@@ -17,7 +17,7 @@ app.use('/auth', authRoutes);
 app.use('/players', playerRoutes);
 
 // MongoDB connection
-mongoose.connect('mongodb://127.0.0.1:27017/sportsDB')
+mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log("MongoDB Connected"))
 .catch(err => console.log(err));
 
