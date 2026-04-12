@@ -16,7 +16,7 @@ if (registerForm) {
             password: inputs[1].value
         };
 
-        const res = await fetch("http://localhost:3000/auth/register", {
+        const res = await fetch("https://sports-management-system-4dj7.onrender.com/auth/register", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(userData)
@@ -36,7 +36,7 @@ if (loginForm) {
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
 
-        const res = await fetch("http://localhost:3000/auth/login", {
+        const res = await fetch("https://sports-management-system-4dj7.onrender.com/auth/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ username, password })
@@ -70,7 +70,7 @@ if (playerForm) {
             position: inputs[4].value
         };
 
-        const res = await fetch("http://localhost:3000/players/add", {
+        const res = await fetch("https://sports-management-system-4dj7.onrender.com/players/add", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(playerData)
@@ -93,7 +93,7 @@ if (playerForm) {
 const playerTable = document.getElementById("playerTable");
 
 if (playerTable) {
-    fetch("http://localhost:3000/players")
+    fetch("https://sports-management-system-4dj7.onrender.com/players")
         .then(res => res.json())
         .then(players => {
             allPlayers = players;
@@ -153,7 +153,7 @@ if (searchInput) {
 async function deletePlayer(id) {
     if (!confirm("Delete this player?")) return;
 
-    const res = await fetch(`http://localhost:3000/players/delete/${id}`, {
+    const res = await fetch(`https://sports-management-system-4dj7.onrender.com/players/delete/${id}`, {
         method: "DELETE"
     });
 
@@ -178,7 +178,7 @@ async function loadPlayerData() {
     const id = new URLSearchParams(window.location.search).get("id");
     if (!id) return;
 
-    const res = await fetch("http://localhost:3000/players");
+    const res = await fetch("https://sports-management-system-4dj7.onrender.com/players");
     const players = await res.json();
 
     const player = players.find(p => p._id == id);
@@ -205,7 +205,7 @@ document.getElementById("editPlayerForm")?.addEventListener("submit", async (e) 
         position: document.getElementById("position").value
     };
 
-    const res = await fetch(`http://localhost:3000/players/update/${id}`, {
+    const res = await fetch(`https://sports-management-system-4dj7.onrender.com/players/update/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updated)
@@ -228,7 +228,7 @@ async function loadDashboardCount() {
 
     if (!totalEl) return;
 
-    const res = await fetch("http://localhost:3000/players");
+    const res = await fetch("https://sports-management-system-4dj7.onrender.com/players");
     const players = await res.json();
 
     totalEl.innerText = players.length;
