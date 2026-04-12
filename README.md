@@ -195,20 +195,25 @@ http://localhost:3000/pages/login.html
 
 ###### **Add Player**
 
-![Add Player](screenshots/add\_player.png)
+![Add Player](screenshots/add_player.png)
 
 
 
 ###### **Edit Player**
 
-![Edit Player](screenshots/edit\_player.png)
+![Edit Player](screenshots/edit_player.png)
 
 
 
 ###### **Delete Player**
 
-![Delete Player](screenshots/delete.png)
+![Delete Player](screenshots/delete_player.png)
 
+
+
+###### **Players List**
+
+![Players List](screenshots/players_list.png)
 
 
 #### **Authors**
