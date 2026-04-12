@@ -1,3 +1,8 @@
+// ================= GLOBAL STORAGE =================
+let allPlayers = [];
+
+// ================= AUTH =================
+
 const registerForm = document.getElementById("registerForm");
 
 if (registerForm) {
@@ -13,9 +18,7 @@ if (registerForm) {
 
         const res = await fetch("http://localhost:3000/auth/register", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(userData)
         });
 
@@ -35,9 +38,7 @@ if (loginForm) {
 
         const res = await fetch("http://localhost:3000/auth/login", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ username, password })
         });
 
@@ -50,6 +51,8 @@ if (loginForm) {
         }
     });
 }
+
+// ================= ADD PLAYER =================
 
 const playerForm = document.getElementById("playerForm");
 
@@ -69,68 +72,100 @@ if (playerForm) {
 
         const res = await fetch("http://localhost:3000/players/add", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(playerData)
         });
 
-        const data = await res.text();
         if (res.ok) {
-    alert("Player Added Successfully");
-} else {
-    alert(data); // show error if something goes wrong
-}
+            alert("Player Added Successfully");
+            window.location.href = "/pages/players.html";
+        } else {
+            const err = await res.text();
+            alert(err);
+        }
 
         playerForm.reset();
     });
 }
 
+// ================= LOAD + DISPLAY PLAYERS =================
+
 const playerTable = document.getElementById("playerTable");
 
 if (playerTable) {
     fetch("http://localhost:3000/players")
-    .then(res => res.json())
-    .then(players => {
-        playerTable.innerHTML = "";
-
-        players.forEach(player => {
-            const row = `
-                <tr>
-                    <td>${player.name}</td>
-		    <td>${player.age}</td>
-                    <td>${player.sport}</td>
-                    <td>${player.team}</td>
-		    <td>${player.position}</td>
-                    <td>
-    <button class="btn btn-warning btn-sm me-2" onclick="editPlayer('${player._id}')">Update</button>
-    <button class="btn btn-danger btn-sm" onclick="deletePlayer('${player._id}')">Delete</button>
-</td>
-                </tr>
-            `;
-            playerTable.innerHTML += row;
+        .then(res => res.json())
+        .then(players => {
+            allPlayers = players;
+            displayPlayers(players);
         });
+}
+
+function displayPlayers(players) {
+    if (!playerTable) return;
+
+    playerTable.innerHTML = "";
+
+    if (players.length === 0) {
+        playerTable.innerHTML = `<tr><td colspan="6" class="text-center">No players found</td></tr>`;
+        return;
+    }
+
+    players.forEach(player => {
+        const row = `
+            <tr>
+                <td>${player.name || ""}</td>
+                <td>${player.age || ""}</td>
+                <td>${player.sport || ""}</td>
+                <td>${player.team || ""}</td>
+                <td>${player.position || ""}</td>
+                <td>
+                    <button class="btn btn-warning btn-sm me-2" onclick="editPlayer('${player._id}')">Update</button>
+                    <button class="btn btn-danger btn-sm" onclick="deletePlayer('${player._id}')">Delete</button>
+                </td>
+            </tr>
+        `;
+        playerTable.innerHTML += row;
     });
 }
 
+// ================= SEARCH =================
+
+const searchInput = document.getElementById("searchInput");
+
+if (searchInput) {
+    searchInput.addEventListener("input", () => {
+        const value = searchInput.value.toLowerCase();
+
+        const filtered = allPlayers.filter(p =>
+            (p.name || "").toLowerCase().includes(value) ||
+            (p.sport || "").toLowerCase().includes(value) ||
+            (p.team || "").toLowerCase().includes(value) ||
+            (p.position || "").toLowerCase().includes(value)
+        );
+
+        displayPlayers(filtered);
+    });
+}
+
+// ================= DELETE =================
+
 async function deletePlayer(id) {
-    const confirmDelete = confirm("Are you sure you want to delete this player?");
-    
-    if (!confirmDelete) return;
+    if (!confirm("Delete this player?")) return;
 
     const res = await fetch(`http://localhost:3000/players/delete/${id}`, {
         method: "DELETE"
     });
 
-    const data = await res.text();
     if (res.ok) {
-    alert("Player Deleted Successfully");
-} else {
-    alert("Error deleting player");
+        alert("Player Deleted");
+        location.reload();
+    } else {
+        alert("Delete failed");
+    }
 }
 
-    location.reload();
-}
+// ================= EDIT =================
 
 function editPlayer(id) {
     window.location.href = `/pages/edit_player.html?id=${id}`;
@@ -138,11 +173,9 @@ function editPlayer(id) {
 
 async function loadPlayerData() {
     const form = document.getElementById("editPlayerForm");
-    if (!form) return; // run only on edit page
+    if (!form) return;
 
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get("id");
-
+    const id = new URLSearchParams(window.location.search).get("id");
     if (!id) return;
 
     const res = await fetch("http://localhost:3000/players");
@@ -150,113 +183,84 @@ async function loadPlayerData() {
 
     const player = players.find(p => p._id == id);
 
-    console.log("ID:", id);
-    console.log("Found Player:", player);
+    if (!player) return;
 
-    if (player) {
-        document.getElementById("name").value = player.name || "";
-        document.getElementById("age").value = player.age || "";
-        document.getElementById("sport").value = player.sport || "";
-        document.getElementById("team").value = player.team || "";
-        document.getElementById("position").value = player.position || "";
-    } else {
-        alert("Player not found");
-    }
+    document.getElementById("name").value = player.name || "";
+    document.getElementById("age").value = player.age || "";
+    document.getElementById("sport").value = player.sport || "";
+    document.getElementById("team").value = player.team || "";
+    document.getElementById("position").value = player.position || "";
 }
 
-document.getElementById("editPlayerForm")?.addEventListener("submit", async function (e) {
+document.getElementById("editPlayerForm")?.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get("id");
+    const id = new URLSearchParams(window.location.search).get("id");
 
-    const updatedPlayer = {
+    const updated = {
         name: document.getElementById("name").value,
-	age: document.getElementById("age").value,
+        age: document.getElementById("age").value,
         sport: document.getElementById("sport").value,
-	team: document.getElementById("team").value,
+        team: document.getElementById("team").value,
         position: document.getElementById("position").value
     };
 
     const res = await fetch(`http://localhost:3000/players/update/${id}`, {
         method: "PUT",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(updatedPlayer)
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updated)
     });
 
     if (res.ok) {
-        alert("Player Updated Successfully");
+        alert("Updated Successfully");
         window.location.href = "/pages/players.html";
     } else {
-        alert("Error updating player");
+        alert("Update failed");
     }
 });
 
-function goToDashboard() {
-    window.location.replace("/pages/dashboard.html");
-}
-
-function goToPlayers() {
-    window.location.replace("/pages/players.html");
-}
-
-function goToAddPlayer() {
-    window.location.replace("/pages/add_player.html");
-}
-
-document.getElementById("searchInput")?.addEventListener("input", function () {
-    const value = this.value.toLowerCase();
-    const rows = document.querySelectorAll("tbody tr");
-
-    let visible = 0;
-
-    rows.forEach(row => {
-        const text = row.innerText.toLowerCase();
-
-        if (text.includes(value)) {
-            row.style.display = "";
-            visible++;
-        } else {
-            row.style.display = "none";
-        }
-    });
-
-    if (visible === 0) {
-        console.log("No players found");
-    }
-});
+// ================= DASHBOARD =================
 
 async function loadDashboardCount() {
+    const totalEl = document.getElementById("totalPlayers");
+    const teamEl = document.getElementById("totalTeams");
+    const sportEl = document.getElementById("totalSports");
+
+    if (!totalEl) return;
+
     const res = await fetch("http://localhost:3000/players");
     const players = await res.json();
 
-    const countElement = document.getElementById("dashboardCount");
-    if (countElement) {
-        countElement.innerText = players.length;
-    }
+    totalEl.innerText = players.length;
+
+    const teams = new Set(players.map(p => p.team).filter(t => t));
+    const sports = new Set(players.map(p => p.sport).filter(s => s));
+
+    teamEl.innerText = teams.size;
+    sportEl.innerText = sports.size;
 }
-loadDashboardCount();
+
+// ================= NAVIGATION =================
+
+function goToDashboard() {
+    window.location.href = "/pages/dashboard.html";
+}
+
+function goToPlayers() {
+    window.location.href = "/pages/players.html";
+}
+
+function goToAddPlayer() {
+    window.location.href = "/pages/add_player.html";
+}
+
+function logout() {
+    window.location.href = "/pages/login.html";
+}
+
+// ================= INIT =================
 
 document.addEventListener("DOMContentLoaded", () => {
     loadPlayerData();
+    loadDashboardCount();
 });
-
-function highlightActivePage() {
-    const path = window.location.pathname;
-
-    const buttons = document.querySelectorAll(".navbar .btn");
-
-    buttons.forEach(btn => btn.classList.remove("active-nav"));
-
-    if (path.includes("dashboard")) buttons[0]?.classList.add("active-nav");
-    if (path.includes("players")) buttons[1]?.classList.add("active-nav");
-    if (path.includes("add_player")) buttons[2]?.classList.add("active-nav");
-}
-
-highlightActivePage();
-
-function logout() {
-    window.location.replace("/pages/login.html");
-}
