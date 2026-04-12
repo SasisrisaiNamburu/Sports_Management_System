@@ -74,7 +74,7 @@ The project demonstrates core web development concepts, including frontend-backe
 
 ###### **Database**
 
-* MongoDB
+* MongoDB Atlas
 
 
 
@@ -114,7 +114,7 @@ sports\_management\_system/
 
 1. Download or clone the repository:
 
-git clone https://github.com/SasisrisaiNamburu/Sports_Management_System.git
+git clone https://github.com/your-username/sports-management-system.git
 
 
 
@@ -140,6 +140,16 @@ http://localhost:3000/pages/login.html
 
 
 
+###### **(OR)**
+
+
+
+Open the link below in a browser:
+
+https://sports-management-system-4dj7.onrender.com
+
+
+
 #### **Functionalities Implemented**
 
 
@@ -150,6 +160,7 @@ http://localhost:3000/pages/login.html
 * Backend API integration
 * Form handling and validation
 * Navigation between pages
+* Deployed the project using Render
 
 
 
@@ -161,7 +172,6 @@ http://localhost:3000/pages/login.html
 * Advanced filtering options
 * Team and match management modules
 * Role-based authentication
-* Deployment (Render / Netlify / Vercel)
 
 
 
@@ -171,49 +181,44 @@ http://localhost:3000/pages/login.html
 
 ###### **Run Commands**
 
-![Run Commands](screenshots/cmd.png)
+!\[Run Commands](screenshots/cmd.png)
 
 
 
 ###### **Login Page**
 
-![Login Page](screenshots/login.png)
+!\[Login Page](screenshots/login.png)
 
 
 
 ###### **Register Page**
 
-![Register Page](screenshots/register.png)
+!\[Register Page](screenshots/register.png)
 
 
 
 ###### **Dashboard**
 
-![Dashboard](screenshots/dashboard.png)
+!\[Dashboard](screenshots/dashboard.png)
 
 
 
 ###### **Add Player**
 
-![Add Player](screenshots/add_player.png)
+!\[Add Player](screenshots/add\_player.png)
 
 
 
 ###### **Edit Player**
 
-![Edit Player](screenshots/edit_player.png)
+!\[Edit Player](screenshots/edit\_player.png)
 
 
 
 ###### **Delete Player**
 
-![Delete Player](screenshots/delete_player.png)
+!\[Delete Player](screenshots/delete.png)
 
-
-
-###### **Players List**
-
-![Players List](screenshots/players_list.png)
 
 
 #### **Authors**
