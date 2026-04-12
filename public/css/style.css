@@ -6,7 +6,122 @@ body {
 }
 
 /* Container */
-.container {
+.container {@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #1f1c2c);
+    background-size: 400% 400%;
+    animation: gradientBG 12s ease infinite, pageEnter 0.8s ease;
+    color: #fff;
+}
+
+/* Gradient Animation */
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Page Entry */
+@keyframes pageEnter {
+    from { opacity: 0; transform: scale(1.02); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Floating Icons */
+body::before {
+    content: "⚽ 🏀 🏏 🎾 ⚽ 🏀 🏏 🎾 ⚽ 🏀 🏏 🎾 ⚽ 🏀 🏏 🎾 ⚽ 🏀 🏏 🎾 ⚽ 🏀 🏏 🎾 ⚽ 🏀 🏏 🎾 ⚽ 🏀 🏏 🎾";
+    position: fixed;
+    top: 10%;
+    left: 5%;
+    font-size: 120px;
+    opacity: 0.05;
+    animation: float 20s infinite;
+    
+    z-index: -1;              /* 👈 SEND IT BEHIND */
+    pointer-events: none;     /* 👈 ALLOW CLICKS THROUGH */
+}
+
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-40px); }
+    100% { transform: translateY(0); }
+}
+
+/* Navbar */
+.navbar {
+    margin: 10px;
+    padding: 12px 20px;
+    border-radius: 15px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(15px);
+}
+
+/* Cards */
+.card {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #fff;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    animation: fadeUp 0.8s ease forwards;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Inputs */
+input, select, textarea {
+    background: rgba(255,255,255,0.1) !important;
+    border: none !important;
+    color: #fff !important;
+    border-radius: 10px !important;
+}
+
+input::placeholder {
+    color: #ddd;
+}
+
+/* Table */
+table {
+    background: rgba(255,255,255,0.05);
+    border-radius: 15px;
+}
+
+table tr:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+/* Buttons */
+button {
+    transition: 0.3s;
+}
+button:hover {
+    transform: scale(1.05);
+}
+
+.btn-success {
+    background: linear-gradient(45deg, #00c6ff, #0072ff);
+    border: none;
+}
+
+.btn-danger {
+    background: #ff4d4d;
+}
+
+.btn-warning {
+    background: #ffcc00;
+}
     max-width: 900px;
 }
 
