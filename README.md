@@ -217,7 +217,7 @@ https://sports-management-system-4dj7.onrender.com
 
 ###### **Delete Player**
 
-![Delete Player](screenshots/delete.png)
+![Delete Player](screenshots/delete_player.png)
 
 
 
