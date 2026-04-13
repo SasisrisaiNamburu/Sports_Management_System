@@ -221,6 +221,12 @@ https://sports-management-system-4dj7.onrender.com
 
 
 
+###### **Players List**
+
+![Players List](screenshots/players_list.png)
+
+
+
 #### **Authors**
 
 
