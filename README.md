@@ -181,43 +181,43 @@ https://sports-management-system-4dj7.onrender.com
 
 ###### **Run Commands**
 
-!\[Run Commands](screenshots/cmd.png)
+![Run Commands](screenshots/cmd.png)
 
 
 
 ###### **Login Page**
 
-!\[Login Page](screenshots/login.png)
+![Login Page](screenshots/login.png)
 
 
 
 ###### **Register Page**
 
-!\[Register Page](screenshots/register.png)
+![Register Page](screenshots/register.png)
 
 
 
 ###### **Dashboard**
 
-!\[Dashboard](screenshots/dashboard.png)
+![Dashboard](screenshots/dashboard.png)
 
 
 
 ###### **Add Player**
 
-!\[Add Player](screenshots/add\_player.png)
+![Add Player](screenshots/add\_player.png)
 
 
 
 ###### **Edit Player**
 
-!\[Edit Player](screenshots/edit\_player.png)
+![Edit Player](screenshots/edit\_player.png)
 
 
 
 ###### **Delete Player**
 
-!\[Delete Player](screenshots/delete.png)
+![Delete Player](screenshots/delete.png)
 
 
 
